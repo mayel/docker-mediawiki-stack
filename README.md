@@ -12,18 +12,27 @@ I recommend running the runfirst.bash. It does work for you with setting visual 
 
 
 ```
-git clone https://github.com/rlewkowicz/docker-mediawiki-stack.git
+git clone https://github.com/mayel/docker-mediawiki-stack.git
 cd docker-mediawiki-stack
 git checkout REL1_28
-git submodule update --init --remote --merge
+git submodule update --init --remote --merge --recursive
+
+cd distribution-files/mwcore/mediawiki/extensions/Wikibase
+composer install
+docker exec -ti dockermediawikistack_phpfpm_1 /bin/bash
+cd /var/www/mediawiki
+php maintenance/update.php
+php extensions/Wikibase/lib/maintenance/populateSitesTable.php
+php extensions/Wikibase/repo/maintenance/rebuildItemsPerSite.php
+php extensions/Wikibase/client/maintenance/populateInterwiki.php
+exit
+
+cd docker-mediawiki-stack
 sudo ./runfirst.bash && \
 docker-compose up [-d] [--force-recreate]
 ```
 
 You're now running the world’s largest enterprise wiki platform.
-
-Project Compendium
-http://binaryoasis.com:8000
 
 
 ### Known Issues and Todos:
