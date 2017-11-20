@@ -16,7 +16,7 @@ git clone https://github.com/mayel/docker-mediawiki-stack.git
 cd docker-mediawiki-stack
 git checkout REL1_28
 git submodule update --init --remote --merge --recursive
-
+sudo ln -s distribution-files/mwcore/mediawiki/extensions/Wikibase distribution-files/Wikibase
 cd distribution-files/mwcore/mediawiki/extensions/Wikibase
 composer install
 docker exec -ti dockermediawikistack_phpfpm_1 /bin/bash
