@@ -17,13 +17,13 @@ cd docker-mediawiki-stack
 git checkout REL1_28
 git submodule update --init --remote --merge --recursive
 mv distribution-files/Wikibase distribution-files/mwcore/mediawiki/extensions/Wikibase
+cp distribution-files/LocalSettings.ready.php distribution-files/mwcore/mediawiki/LocalSettings.php
 
 sudo ./runfirst.bash
-docker-compose up
+docker-compose up [--force-recreate]
 
 docker exec -ti dockermediawikistack_phpfpm_1 /bin/bash
-cd /var/www/mediawiki
-cd distribution-files/mwcore/mediawiki/extensions/Wikibase
+cd /var/www/mediawiki/extensions/Wikibase
 composer install
 cd /var/www/mediawiki
 php maintenance/update.php
@@ -34,7 +34,7 @@ exit
 
 cd docker-mediawiki-stack
 sudo ./fixperms.sh
-docker-compose up [-d] [--force-recreate]
+docker-compose up -d
 ```
 
 You're now running the world’s largest enterprise wiki platform.
