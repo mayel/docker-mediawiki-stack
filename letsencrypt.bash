@@ -6,6 +6,13 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 
+echo "Restarting frontend to prepare to serve .well-known"
+docker-compose down
+docker-compose up -d
+sleep 20
+
+
+echo "Preparing certbot"
 docker pull palobo/certbot
 
 GetCert() {
@@ -25,7 +32,8 @@ GetCert -d wiki.haha.academy -d haha.academy
 GetCert -d wiki.social.coop
 
 echo "Restarting Web Frontend..."
-docker stop dockermediawikistack_nginx_1
-docker start dockermediawikistack_nginx_1
+cd $DIR
+docker-compose down
+docker-compose up -d
 
 echo "Done"
