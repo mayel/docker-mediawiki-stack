@@ -19,6 +19,8 @@ services:
     - "/etc/passwd:/etc/passwd:ro"
     - "/etc/shadow:/etc/shadow:ro"
     - "/etc/group:/etc/group:ro"
+    - "./letsencrypt/www:/var/www/letsencrypt"
+    - "./letsencrypt/etc:/etc/letsencrypt"
     depends_on:
     - phpfpm
     - parsoid

@@ -1,2 +1,4 @@
-
 distribution-files/mysql/
+letsencrypt/
+distribution-files/LocalSettings.*
+docker-compose.test.yml
