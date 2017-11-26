@@ -28,7 +28,7 @@ GetCert() {
 
 echo "Getting certificates..."
 # customise with your domain(s) here
-GetCert -d wiki.haha.academy -d haha.academy
+GetCert -d wiki.haha.academy
 GetCert -d wiki.social.coop
 
 echo "Restarting Web Frontend..."
