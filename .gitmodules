@@ -6,3 +6,6 @@
 	path = distribution-files/Wikibase
 	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Wikibase.git
 	branch = REL1_28
+[submodule "distribution-files/MW-OAuth2Client"]
+	path = distribution-files/MW-OAuth2Client
+	url = https://github.com/Schine/MW-OAuth2Client.git

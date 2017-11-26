@@ -16,15 +16,21 @@ git clone https://github.com/mayel/docker-mediawiki-stack.git
 cd docker-mediawiki-stack
 git checkout REL1_28
 git submodule update --init --remote --merge --recursive
-mv distribution-files/Wikibase distribution-files/mwcore/mediawiki/extensions/Wikibase
-cp distribution-files/LocalSettings.ready.php distribution-files/mwcore/mediawiki/LocalSettings.php
+mv distribution-files/Wikibase distribution-files/mwcore/mediawiki/extensions/
+mv distribution-files/MW-OAuth2Client distribution-files/mwcore/mediawiki/extensions/
+
+create or copy your config(s) to distribution-files/mwcore/mediawiki/LocalSettings.php
 
 sudo ./runfirst.bash
 docker-compose up [--force-recreate]
 
 docker exec -ti dockermediawikistack_phpfpm_1 /bin/bash
+
 cd /var/www/mediawiki/extensions/Wikibase
 composer install
+cd /var/www/mediawiki/extensions/MW-OAuth2Client/vendors/oauth2-client
+composer install
+
 cd /var/www/mediawiki
 php maintenance/update.php
 php extensions/Wikibase/lib/maintenance/populateSitesTable.php
